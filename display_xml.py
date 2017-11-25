@@ -7,8 +7,7 @@ from uuid import uuid4
 
 from IPython.display import display
 
-
-
+no_blank_parser = et.XMLParser(remove_blank_text=True)
 
 
 class XML:
@@ -40,14 +39,14 @@ class XML:
             Pygment style names (the default is 'default')
         '''
         if isinstance(in_obj, str):
-            self.xml = et.fromstring(in_obj)
+            self.xml = et.fromstring(in_obj, parser=no_blank_parser)
         elif isinstance(in_obj, bytes): 
-            self.xml = et.fromstring(in_obj)
+            self.xml = et.fromstring(in_obj, parser=no_blank_parser)
         elif isinstance(in_obj, et._ElementTree):
             self.xml = in_obj.getroot()
         else:  # assume isinstance(in_obj, et._Element)
-            self.xml        
-            
+            self.xml
+        
         self.text = et.tostring(self.xml, pretty_print=True)
         self.style = style
         self.formatter = HtmlFormatter(style=self.style)
@@ -82,7 +81,6 @@ class XML:
                       template=cls.NAMED_STYLE_TEMPLATE, 
                       extras={"style_name": style}
                       ))
-        
     
     @property
     def style_css(self):

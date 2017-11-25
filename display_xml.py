@@ -11,11 +11,12 @@ HTML_TEMPLATE = """<div class={}> <style>
 </div>
 """
 
+
 class XML:
     '''Class for displaying XML in a pretty way that supports pygments styles.
-    
+
     '''
-    
+
     def __init__(self, in_obj, style='default'):
         '''
         Parameters
@@ -31,14 +32,12 @@ class XML:
             self.text = et.tostring(in_obj)
         elif isinstance(in_obj, et._ElementTree):
             self.text = et.tostring(in_obj.getroot())
-        else: # assume isinstance(in_obj, bytes)
+        else:  # assume isinstance(in_obj, bytes)
             self.text = in_obj
         self.style = style
         self.formatter = HtmlFormatter(style=self.style)
         self.uuid_class = "a"+str(self.uuid)
-    
-    
-    
+
     @property
     def style_css(self):
         temp_css = self.formatter.get_style_defs()
@@ -48,7 +47,7 @@ class XML:
     @property
     def uuid(self):
         return uuid4()
-    
+
     def _repr_html_(self):
         content = highlight(self.text, XmlLexer(), self.formatter)
         return HTML_TEMPLATE.format(self.uuid_class, self.style_css, content)

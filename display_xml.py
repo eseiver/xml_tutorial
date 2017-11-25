@@ -40,13 +40,15 @@ class XML:
             Pygment style names (the default is 'default')
         '''
         if isinstance(in_obj, str):
-            self.text = in_obj.encode('utf-8')
-        elif isinstance(in_obj, et._Element):
-            self.text = et.tostring(in_obj)
+            self.xml = et.fromstring(in_obj)
+        elif isinstance(in_obj, bytes): 
+            self.xml = et.fromstring(in_obj)
         elif isinstance(in_obj, et._ElementTree):
-            self.text = et.tostring(in_obj.getroot())
-        else:  # assume isinstance(in_obj, bytes)
-            self.text = in_obj
+            self.xml = in_obj.getroot()
+        else:  # assume isinstance(in_obj, et._Element)
+            self.xml        
+            
+        self.text = et.tostring(self.xml, pretty_print=True)
         self.style = style
         self.formatter = HtmlFormatter(style=self.style)
         self.uuid_class = "a"+str(self.uuid)

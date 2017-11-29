@@ -45,7 +45,7 @@ class XML:
         elif isinstance(in_obj, et._ElementTree):
             self.xml = in_obj.getroot()
         else:  # assume isinstance(in_obj, et._Element)
-            self.xml
+            self.xml = in_obj
         
         self.text = et.tostring(self.xml, pretty_print=True)
         self.style = style

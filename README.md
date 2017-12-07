@@ -1,5 +1,5 @@
 # Tutorial for 2017 allofplos presentation at UC BIDS
-allofplos: www.github.com/PLOS/allofplos
+allofplos: www.github.com/PLOS/allofplos  
 event info: http://www.thehackerwithin.org/berkeley/posts/2017-11-29-allofplos-f17.html
 
 ## To run the slideshow in reveal.js
